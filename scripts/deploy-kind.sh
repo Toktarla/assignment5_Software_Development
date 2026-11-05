@@ -23,6 +23,11 @@ echo "Applying Kubernetes manifests"
   cat k8s/service.yaml
 } | docker exec -i "$NODE" kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -f -
 
+echo "Restarting the deployment so the new image is the one that runs"
+docker exec "$NODE" \
+  kubectl --kubeconfig=/etc/kubernetes/admin.conf \
+  rollout restart deployment/qogam-sentiment
+
 echo "Waiting for the rollout"
 docker exec "$NODE" \
   kubectl --kubeconfig=/etc/kubernetes/admin.conf \
