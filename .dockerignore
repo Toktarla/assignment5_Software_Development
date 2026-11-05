@@ -1,0 +1,8 @@
+.venv
+.git
+.pytest_cache
+report
+jenkins
+k8s
+**/*.md
+**/__pycache__
